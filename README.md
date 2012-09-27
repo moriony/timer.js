@@ -18,6 +18,24 @@ var test = new timer({
 test.start()
 ```
 
+Don't stop timer, don't stop! :D
+```javascript
+var dontStop = new timer({
+    'ticks' : 3,
+    'onStart' : function(ticks, ticksRemain) {
+        console.log('start', ticks, ticksRemain);
+    },
+    'onTick' : function(ticks, ticksRemain) {
+        console.log(ticks, ticksRemain);
+    },
+    'onStop' : function(ticks, ticksRemain) {
+        console.log('stop', ticks, ticksRemain);
+        this.start();
+    }
+});
+dontStop.start();
+```
+
 Options
 ===
 ```javascript
