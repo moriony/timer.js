@@ -11,7 +11,7 @@ Simple 10 seconds timer with alert on end
 ```javascript
 var test = new timer({
   'ticks' : 10,
-  'onFinish' : function() {
+  'onStop' : function() {
     alert('Finish!');
   }
 });
@@ -26,7 +26,7 @@ Options
   ticks:      1,              // The number of ticks that carry out the timer before stopping
   delay:      1000,           // Delay between ticks in microseconds
   onStart:    null,           // Callback function on timer.start()
-  onFinish:   null,           // Callback function on timer.stop()
+  onStop:     null,           // Callback function on timer.stop()
   onTick:     null            // Callback function on every tick
 }
 ```
