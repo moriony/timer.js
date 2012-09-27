@@ -10,7 +10,7 @@ var timer = function (options) {
         ticks:      options.ticks || 1,
         delay:      options.delay || 1000,
         onStart:    options.onStart || null,
-        onFinish:   options.onFinish || null,
+        onStop:     options.onStop || null,
         onTick:     options.onTick || null
     };
 
@@ -18,17 +18,13 @@ var timer = function (options) {
         if(ticks < options.ticks) {
             if(options.onStart && ticks == 0) {
                 options.onStart.call(self, ticks, options.ticks - ticks);
-            }
-            if(options.onTick && ticks > 0) {
+            } else if(options.onTick) {
                 options.onTick.call(self, ticks, options.ticks - ticks);
             }
             ticks++;
             timer = setTimeout(tick, options.delay)
         } else {
             self.stop();
-            if(options.onFinish) {
-                options.onFinish.call(self, ticks, 0);
-            }
         }
     };
 
@@ -56,6 +52,12 @@ var timer = function (options) {
     };
 
     this.stop = function () {
-        return this.pause().reset();
+        if(this.isActive()) {
+            this.pause().reset();
+            if(options.onStop) {
+                options.onStop.call(this, ticks, 0);
+            }
+        }
+        return this;
     };
 };
