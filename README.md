@@ -51,7 +51,7 @@ Options
 
 Callbacks
 ===
-Callbacks must have save structure
+Callbacks must have same structure
 ```javascript
 function(ticks, ticksRemain) {
   // do something
